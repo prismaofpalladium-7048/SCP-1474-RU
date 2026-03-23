@@ -644,6 +644,21 @@ function revealO5() {
 document.getElementById('clearanceLink').addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVoid(); }
 });
+
+// ─── СООБЩАЕМ ВЫСОТУ РОДИТЕЛЬСКОЙ СТРАНИЦЕ ───
+function reportHeight() {
+  var h = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.scrollHeight
+  );
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+new MutationObserver(reportHeight).observe(
+  document.body, { childList: true, subtree: true, attributes: true }
+);
 </script>
 </body>
 </html>
