@@ -110,6 +110,7 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
   inset: 0;
   z-index: 9999;
   overflow-y: auto;
+  overflow-x: hidden;
   transition: opacity 0.7s ease;
 
   --bg:        #080808;
@@ -152,8 +153,8 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
 .v-badge{border:1px solid var(--red);padding:4px 8px;font-size:clamp(7px,2vw,10px);letter-spacing:clamp(1px,.8vw,3px);color:var(--red-bright);text-transform:uppercase;white-space:nowrap;animation:v-pulse 3s ease-in-out infinite}
 @keyframes v-pulse{0%,100%{box-shadow:0 0 4px var(--red-glow)}50%{box-shadow:0 0 16px var(--red-glow),inset 0 0 8px var(--red-glow)}}
 
-.v-wrap{max-width:940px;margin:0 auto;padding:20px 14px 80px}
-@media(min-width:600px){.v-wrap{padding:40px 24px 90px}}
+.v-wrap{max-width:940px;margin:0 auto;padding:20px 14px 40px;overflow-x:hidden}
+@media(min-width:600px){.v-wrap{padding:40px 24px 50px}}
 .v-wrap>*{animation:v-fi .6s ease both}
 .v-wrap>*:nth-child(1){animation-delay:.05s}.v-wrap>*:nth-child(2){animation-delay:.12s}
 .v-wrap>*:nth-child(3){animation-delay:.2s}.v-wrap>*:nth-child(4){animation-delay:.28s}
@@ -196,7 +197,7 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
 .v-vat{font-size:clamp(6px,1.5vw,8px);letter-spacing:2px;color:#444;text-transform:uppercase;white-space:nowrap}
 .v-vg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px;z-index:1}
 
-.v-sec{margin-bottom:36px}
+.v-sec{margin-bottom:28px}
 .v-sh{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .v-sn{font-size:9px;color:var(--red-bright);letter-spacing:3px;font-family:'Special Elite',serif}
 .v-st{font-family:'Special Elite',serif;font-size:clamp(10px,3vw,14px);letter-spacing:clamp(2px,1vw,5px);text-transform:uppercase;color:#a09890}
@@ -220,12 +221,12 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
 .v-note{border-left:3px solid var(--border);padding:14px 16px;background:rgba(255,255,255,.015);margin:20px 0;font-style:italic;color:#8a8680;font-size:13.5px}
 .v-na{font-style:normal;font-size:11px;letter-spacing:2px;color:var(--dim);margin-top:8px;display:block}
 
-.v-add{border:1px solid var(--border);margin-bottom:22px;background:var(--paper)}
+.v-add{border:1px solid var(--border);margin-bottom:16px;background:var(--paper)}
 .v-ah{padding:12px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.015);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
 .v-ai{font-family:'Special Elite',serif;font-size:13px;letter-spacing:3px;color:#a09890}
 .v-ad{font-size:clamp(9px,2vw,10px);color:var(--dim);letter-spacing:1px}
-.v-ab{padding:18px 16px}
-@media(min-width:600px){.v-ab{padding:22px 24px}}
+.v-ab{padding:16px}
+@media(min-width:600px){.v-ab{padding:20px 22px}}
 
 .v-ts{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
 .v-thi{font-size:9px;letter-spacing:2px;color:#3a3a3a;text-align:center;padding-top:4px}
@@ -245,14 +246,14 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
 .v-xr{color:var(--blue-text);cursor:default;border-bottom:1px dotted #3a5a7a}
 .v-org{display:inline-block;border:1px solid #444;padding:1px 7px;font-size:9px;letter-spacing:2px;color:#666;text-transform:uppercase;vertical-align:middle;margin-left:6px}
 
-.v-o5c{position:relative;overflow:hidden}
-.v-o5c .v-o5p{filter:blur(4px);user-select:none;transition:filter .7s ease;pointer-events:none;margin-bottom:14px}
+.v-o5c{position:relative;overflow:visible;width:100%}
+.v-o5c .v-o5p{filter:blur(4px);user-select:none;transition:filter .7s ease;pointer-events:none;margin-bottom:14px;word-break:break-word;overflow-wrap:break-word}
 .v-o5c.revealed .v-o5p{filter:blur(0);user-select:auto;pointer-events:auto}
 .v-o5c.scanning::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red-bright),transparent);animation:v-sc .55s ease forwards;pointer-events:none;z-index:10}
 @keyframes v-sc{from{top:0}to{top:100%}}
 
 .v-obw{display:flex;justify-content:center;margin:22px 0 6px;transition:opacity .4s}
-.v-ob{background:transparent;border:1px solid var(--red);color:var(--red-bright);font-family:'Special Elite',serif;font-size:clamp(10px,2.8vw,12px);letter-spacing:clamp(2px,1vw,4px);text-transform:uppercase;padding:14px 20px;cursor:pointer;position:relative;overflow:hidden;transition:color .3s,box-shadow .3s;width:100%;max-width:440px;-webkit-tap-highlight-color:transparent}
+.v-ob{background:transparent;border:1px solid var(--red);color:var(--red-bright);font-family:'Special Elite',serif;font-size:clamp(10px,2.8vw,12px);letter-spacing:clamp(2px,1vw,4px);text-transform:uppercase;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;transition:color .3s,box-shadow .3s;width:100%;max-width:100%;-webkit-tap-highlight-color:transparent}
 .v-ob::before{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:0}
 .v-ob span{position:relative;z-index:1}
 @media(hover:hover){.v-ob:hover{box-shadow:0 0 24px var(--red-glow)}.v-ob:hover::before{transform:scaleX(1)}.v-ob:hover span{color:#fff}}
@@ -263,11 +264,11 @@ hr.wiki-rule { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
 .v-af.visible{display:block;animation:v-af 2s ease forwards}
 @keyframes v-af{0%{opacity:0;letter-spacing:2px}30%{opacity:1;letter-spacing:6px}80%{opacity:1;letter-spacing:5px}100%{opacity:.55;letter-spacing:5px}}
 
-.v-fns{margin-top:60px;padding-top:18px;border-top:1px solid var(--border)}
-.v-fn{font-size:11px;color:#555;margin-bottom:7px;display:flex;gap:10px}
+.v-fns{margin-top:36px;padding-top:16px;border-top:1px solid var(--border)}
+.v-fn{font-size:11px;color:#555;margin-bottom:7px;display:flex;gap:10px;word-break:break-word}
 .v-fnn{color:var(--dim);flex-shrink:0}
 
-.v-footer{margin-top:56px;padding:16px 18px;border:1px solid var(--border);background:var(--paper);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;font-size:clamp(8px,2vw,10px);color:#444;letter-spacing:2px;text-transform:uppercase}
+.v-footer{margin-top:28px;padding:14px 16px;border:1px solid var(--border);background:var(--paper);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;font-size:clamp(8px,2vw,10px);color:#444;letter-spacing:2px;text-transform:uppercase}
 </style>
 </head>
 <body>
