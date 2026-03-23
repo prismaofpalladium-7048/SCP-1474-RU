@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SCP-Ø | Фонд SCP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: auto;
+}
+/* ════════════════════════════════
+   СЛОЙ 2 — SCP-Ø
+   ════════════════════════════════ */
+
+html, body {
+
+  --bg:        #080808;
+  --paper:     #0e0e0e;
+  --text:      #c8c4b8;
+  --dim:       #6a6660;
+  --red:       #7a0000;
+  --red-bright:#b00000;
+  --red-glow:  #ff000033;
+  --border:    #2a2520;
+  --green-text:#4aff4a;
+  --yellow:    #b8a800;
+  --blue-text: #6aaad4;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px);
+  pointer-events: none; z-index: 1000;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: 0.35; z-index: 999;
+}
+
+.v-header { background:#000; border-bottom:2px solid var(--red); padding:10px 16px; display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:500; box-shadow:0 0 30px var(--red-glow); }
+@media(min-width:600px){.v-header{padding:10px 32px;gap:20px}}
+.v-logo-text{font-family:'Special Elite',serif;font-size:clamp(13px,4vw,20px);color:#fff;letter-spacing:clamp(1px,1vw,4px);text-transform:uppercase;white-space:nowrap}
+.v-logo-sub{font-size:clamp(7px,2vw,10px);color:var(--dim);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.v-hdr-div{flex:1;height:1px;background:var(--border)}
+.v-badge{border:1px solid var(--red);padding:4px 8px;font-size:clamp(7px,2vw,10px);letter-spacing:clamp(1px,.8vw,3px);color:var(--red-bright);text-transform:uppercase;white-space:nowrap;animation:v-pulse 3s ease-in-out infinite}
+@keyframes v-pulse{0%,100%{box-shadow:0 0 4px var(--red-glow)}50%{box-shadow:0 0 16px var(--red-glow),inset 0 0 8px var(--red-glow)}}
+
+.v-wrap{max-width:940px;margin:0 auto;padding:20px 14px 40px;overflow-x:hidden}
+@media(min-width:600px){.v-wrap{padding:40px 24px 50px}}
+.v-wrap>*{animation:v-fi .6s ease both}
+.v-wrap>*:nth-child(1){animation-delay:.05s}.v-wrap>*:nth-child(2){animation-delay:.12s}
+.v-wrap>*:nth-child(3){animation-delay:.2s}.v-wrap>*:nth-child(4){animation-delay:.28s}
+@keyframes v-fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.v-int-notice{border:1px solid #2a3a2a;background:rgba(30,50,30,.25);padding:10px 16px;font-size:11px;letter-spacing:1px;color:#4a6a4a;font-family:'Courier Prime',monospace;line-height:1.6}
+.v-int-notice strong{color:#6a9a6a}
+
+.v-title-block{border:1px solid var(--border);background:var(--paper);padding:24px 18px;position:relative;overflow:hidden;margin-top:0}
+@media(min-width:600px){.v-title-block{padding:40px 48px}}
+.v-title-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(120,0,0,.08) 0%,transparent 70%);pointer-events:none}
+.v-scp-number{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(64px,20vw,120px);color:#fff;line-height:1;text-shadow:0 0 40px rgba(180,0,0,.6),0 0 80px rgba(180,0,0,.3),0 0 160px rgba(180,0,0,.1);letter-spacing:-4px;animation:v-fk 8s ease-in-out infinite}
+@keyframes v-fk{0%,95%,100%{opacity:1}96%{opacity:.85}97%{opacity:1}98%{opacity:.7}99%{opacity:1}}
+.v-codename{font-family:'Special Elite',serif;font-size:clamp(9px,2.5vw,13px);letter-spacing:clamp(2px,1vw,5px);color:var(--dim);text-transform:uppercase;margin-top:8px}
+.v-coords{margin-top:12px;font-size:clamp(9px,1.9vw,11px);color:var(--dim);display:flex;flex-wrap:wrap;gap:2px 16px}
+.v-coord{white-space:nowrap;letter-spacing:1px}
+
+.v-cr{display:grid;grid-template-columns:1fr;border-left:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px}
+@media(min-width:480px){.v-cr{grid-template-columns:repeat(3,1fr)}}
+.v-cc{padding:14px 16px;border-bottom:1px solid var(--border)}
+@media(min-width:480px){.v-cc{border-bottom:none;border-right:1px solid var(--border)}.v-cc:last-child{border-right:none}}
+.v-cl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.v-cv{font-family:'Special Elite',serif;font-size:18px;letter-spacing:2px}
+.v-nullius{color:#fff;text-shadow:0 0 20px rgba(255,255,255,.4);font-size:22px}
+.v-amida{color:var(--yellow)}.v-risk{color:var(--red-bright)}
+.v-dots{display:flex;gap:5px;margin-top:6px}
+.v-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.v-dot.on{background:var(--yellow);box-shadow:0 0 8px var(--yellow)}
+
+.v-vc{width:100%;height:clamp(150px,30vw,220px);background:#000;border:1px solid var(--border);border-bottom:none;position:relative;overflow:hidden;margin-top:24px}
+.v-vl{position:absolute;top:10px;left:12px;font-size:clamp(7px,1.8vw,9px);letter-spacing:2px;color:var(--dim);text-transform:uppercase;z-index:2;max-width:60%;line-height:1.5}
+.v-vco{position:absolute;bottom:10px;right:12px;font-size:clamp(7px,1.8vw,9px);color:#333;letter-spacing:1px;text-align:right}
+.v-sf{position:absolute;inset:0}
+.v-star{position:absolute;background:#fff;border-radius:50%;animation:v-tw var(--dur) ease-in-out infinite}
+@keyframes v-tw{0%,100%{opacity:var(--base-op)}50%{opacity:calc(var(--base-op)*.3)}}
+.v-vc-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(52px,14vw,90px);height:clamp(52px,14vw,90px);border-radius:50%;background:#000;z-index:3}
+.v-vc-brd{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:calc(clamp(52px,14vw,90px)+6px);height:calc(clamp(52px,14vw,90px)+6px);border-radius:50%;border:1px solid #1a1a1a;z-index:4}
+.v-va{position:absolute;top:50%;left:calc(50% + clamp(32px,8vw,54px));transform:translateY(-50%);z-index:5;display:flex;align-items:center;gap:8px}
+.v-val{width:20px;height:1px;background:#333}
+.v-vat{font-size:clamp(6px,1.5vw,8px);letter-spacing:2px;color:#444;text-transform:uppercase;white-space:nowrap}
+.v-vg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px;z-index:1}
+
+.v-sec{margin-bottom:28px}
+.v-sh{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.v-sn{font-size:9px;color:var(--red-bright);letter-spacing:3px;font-family:'Special Elite',serif}
+.v-st{font-family:'Special Elite',serif;font-size:clamp(10px,3vw,14px);letter-spacing:clamp(2px,1vw,5px);text-transform:uppercase;color:#a09890}
+.v-sr{flex:1;height:1px;background:var(--border)}
+
+.v-p{margin-bottom:14px}.v-p:last-child{margin-bottom:0}
+.v-ul{padding-left:20px;margin-bottom:14px}.v-ul li{margin-bottom:7px}
+
+.v-rd{background:#1a1a1a;color:#1a1a1a;border-radius:2px;padding:0 4px;cursor:default;border:none;outline:none;font-family:inherit;font-size:inherit;letter-spacing:1px;display:inline;transition:all .2s;-webkit-tap-highlight-color:transparent}
+@media(hover:hover){.v-rd:hover{background:var(--red);color:rgba(200,196,184,.4);box-shadow:0 0 12px var(--red-glow)}}
+.v-rd:active,.v-rd:focus{background:var(--red);color:rgba(200,196,184,.4);box-shadow:0 0 12px var(--red-glow)}
+
+.v-warn{border:1px solid var(--red);background:rgba(120,0,0,.08);padding:16px 18px;margin:22px 0;position:relative}
+.v-warn::before{content:'⚠';position:absolute;top:-12px;left:14px;background:var(--paper);padding:0 8px;color:var(--red-bright);font-size:14px}
+.v-wt{font-family:'Special Elite',serif;font-size:11px;letter-spacing:4px;color:var(--red-bright);text-transform:uppercase;margin-bottom:10px}
+
+.v-ref{border:1px solid #2a3a4a;background:rgba(40,60,80,.12);padding:14px 18px;margin:20px 0;position:relative;font-size:13.5px;color:#7a9aaa}
+.v-ref::before{content:'↗';position:absolute;top:-11px;left:14px;background:var(--paper);padding:0 8px;color:var(--blue-text);font-size:13px}
+.v-rl{font-family:'Special Elite',serif;font-size:9px;letter-spacing:4px;color:var(--blue-text);text-transform:uppercase;margin-bottom:8px}
+
+.v-note{border-left:3px solid var(--border);padding:14px 16px;background:rgba(255,255,255,.015);margin:20px 0;font-style:italic;color:#8a8680;font-size:13.5px}
+.v-na{font-style:normal;font-size:11px;letter-spacing:2px;color:var(--dim);margin-top:8px;display:block}
+
+.v-add{border:1px solid var(--border);margin-bottom:16px;background:var(--paper)}
+.v-ah{padding:12px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.015);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.v-ai{font-family:'Special Elite',serif;font-size:13px;letter-spacing:3px;color:#a09890}
+.v-ad{font-size:clamp(9px,2vw,10px);color:var(--dim);letter-spacing:1px}
+.v-ab{padding:16px}
+@media(min-width:600px){.v-ab{padding:20px 22px}}
+
+.v-ts{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.v-thi{font-size:9px;letter-spacing:2px;color:#3a3a3a;text-align:center;padding-top:4px}
+@media(min-width:640px){.v-thi{display:none}}
+.v-tab{width:100%;min-width:500px;border-collapse:collapse;font-size:13px}
+.v-tab th{text-align:left;padding:8px 12px;background:rgba(255,255,255,.03);border:1px solid var(--border);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);font-weight:normal;font-family:'Special Elite',serif}
+.v-tab td{padding:10px 12px;border:1px solid var(--border);vertical-align:top;line-height:1.6}
+.v-tab tr:hover td{background:rgba(255,255,255,.02)}
+.v-ta{color:var(--yellow)}.v-tok{color:#4a8a4a}
+
+.v-stamp{display:inline-block;border:2px solid var(--green-text);color:var(--green-text);font-family:'Special Elite',serif;font-size:11px;letter-spacing:3px;padding:4px 10px;text-transform:uppercase;transform:rotate(-2deg);opacity:.7;margin:8px 0;box-shadow:0 0 10px rgba(74,255,74,.15)}
+
+.v-div{text-align:center;color:var(--border);letter-spacing:12px;font-size:12px;margin:32px 0}
+
+.v-hl{color:#d0ccc0}.v-hr{color:var(--red-bright)}.v-hy{color:var(--yellow)}.v-hb{color:var(--blue-text)}
+.v-mono{font-family:'Courier Prime',monospace;font-size:12px;color:#888}
+.v-xr{color:var(--blue-text);cursor:default;border-bottom:1px dotted #3a5a7a}
+.v-org{display:inline-block;border:1px solid #444;padding:1px 7px;font-size:9px;letter-spacing:2px;color:#666;text-transform:uppercase;vertical-align:middle;margin-left:6px}
+
+.v-o5c{position:relative;overflow:visible;width:100%}
+.v-o5c .v-o5p{filter:blur(4px);user-select:none;transition:filter .7s ease;pointer-events:none;margin-bottom:14px;word-break:break-word;overflow-wrap:break-word}
+.v-o5c.revealed .v-o5p{filter:blur(0);user-select:auto;pointer-events:auto}
+.v-o5c.scanning::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red-bright),transparent);animation:v-sc .55s ease forwards;pointer-events:none;z-index:10}
+@keyframes v-sc{from{top:0}to{top:100%}}
+
+.v-obw{display:flex;justify-content:center;margin:22px 0 6px;transition:opacity .4s}
+.v-ob{background:transparent;border:1px solid var(--red);color:var(--red-bright);font-family:'Special Elite',serif;font-size:clamp(10px,2.8vw,12px);letter-spacing:clamp(2px,1vw,4px);text-transform:uppercase;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;transition:color .3s,box-shadow .3s;width:100%;max-width:100%;-webkit-tap-highlight-color:transparent}
+.v-ob::before{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:0}
+.v-ob span{position:relative;z-index:1}
+@media(hover:hover){.v-ob:hover{box-shadow:0 0 24px var(--red-glow)}.v-ob:hover::before{transform:scaleX(1)}.v-ob:hover span{color:#fff}}
+.v-ob:active{transform:scale(.98);box-shadow:0 0 24px var(--red-glow)}.v-ob:active::before{transform:scaleX(1)}.v-ob:active span{color:#fff}
+.v-ob:focus{outline:none}
+
+.v-af{display:none;text-align:center;font-family:'Special Elite',serif;font-size:11px;letter-spacing:5px;color:var(--green-text);text-transform:uppercase;margin-top:8px;opacity:0}
+.v-af.visible{display:block;animation:v-af 2s ease forwards}
+@keyframes v-af{0%{opacity:0;letter-spacing:2px}30%{opacity:1;letter-spacing:6px}80%{opacity:1;letter-spacing:5px}100%{opacity:.55;letter-spacing:5px}}
+
+.v-fns{margin-top:36px;padding-top:16px;border-top:1px solid var(--border)}
+.v-fn{font-size:11px;color:#555;margin-bottom:7px;display:flex;gap:10px;word-break:break-word}
+.v-fnn{color:var(--dim);flex-shrink:0}
+
+.v-footer{margin-top:28px;padding:14px 16px;border:1px solid var(--border);background:var(--paper);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;font-size:clamp(8px,2vw,10px);color:#444;letter-spacing:2px;text-transform:uppercase}
+
+html, body { min-height: 100vh; overflow-y: auto; }
+body::before, body::after { position: fixed; }
+</style>
+</head>
+<body>
+  <div class="v-header">
+    <div>
+      <div class="v-logo-text">SCP Foundation</div>
+      <div class="v-logo-sub">Secure · Contain · Protect</div>
+    </div>
+    <div class="v-hdr-div"></div>
+    <div class="v-badge">Допуск 5 / O5</div>
+  </div>
+
+  <div class="v-wrap">
+
+    <div class="v-int-notice">
+      <strong>ПРОЕКТ ЕИИ · Экспериментальный интерфейс · Версия 0.8.3</strong><br>
+      Данная страница является частью инициативы O5-9 по переводу документации высшего гриф-уровня на визуально-расширенный формат с целью снижения когнитивной нагрузки при работе с онтологически нетривиальными объектами. Предыдущие версии этого файла в стандартном текстовом оформлении демонстрировали устойчивое падение концентрации читателей начиная приблизительно со второй страницы описания. Исследовательская группа ЕИИ предполагает, что визуальный контекст помогает удерживать дистанцию между читателем и содержанием. Это гипотеза, не подтверждённая. Если вы её читаете — пожалуйста, продолжайте.
+    </div>
+
+    <div class="v-title-block">
+      <div class="v-scp-number">SCP&#x2205;</div>
+      <div class="v-codename">Кодовое обозначение: «&#x00D8;» &nbsp;·&nbsp; «Пустое» &nbsp;·&nbsp; «Остаток»</div>
+      <div class="v-coords">
+        <span class="v-coord">α (RA): 14h 49m 22.8s</span>
+        <span class="v-coord">δ (Dec): +46° 07′ 15.3″</span>
+        <span class="v-coord">Эпоха J2000.0</span>
+        <span class="v-coord">l = 86°08′42″</span>
+        <span class="v-coord">b = +61°33′19″</span>
+        <span class="v-coord">Дистанция: неопределима<sup>†</sup></span>
+      </div>
+    </div>
+
+    <div class="v-cr">
+      <div class="v-cc"><div class="v-cl">Класс объекта</div><div class="v-cv v-nullius">NULLIUS</div><div style="font-size:9px;color:#444;margin-top:6px;letter-spacing:1px;">Стандартные классификации неприменимы</div></div>
+      <div class="v-cc"><div class="v-cl">Уровень разрушения</div><div class="v-cv v-amida">AMIDA</div><div class="v-dots"><div class="v-dot on"></div><div class="v-dot on"></div><div class="v-dot on"></div><div class="v-dot on"></div><div class="v-dot on"></div></div></div>
+      <div class="v-cc"><div class="v-cl">Уровень риска</div><div class="v-cv v-risk">НЕПРИМЕНИМО</div><div style="font-size:9px;color:#555;margin-top:6px;letter-spacing:1px;">Оценка категориально невозможна</div></div>
+    </div>
+
+    <div class="v-vc">
+      <div class="v-vl">Фотометрический обзор — полоса B/V/R/I/Z · Созвездие Волопаса</div>
+      <div class="v-vg"></div>
+      <div class="v-sf" id="vSF"></div>
+      <div class="v-vc-core"></div>
+      <div class="v-vc-brd"></div>
+      <div class="v-va"><div class="v-val"></div><div class="v-vat">SCP-Ø [граница условна]</div></div>
+      <div class="v-vco">ERR_INVALID_SNR · 23/23 диапазонов · █████ Мпк</div>
+    </div>
+
+    <div class="v-div">· · · ◈ · · ·</div>
+
+    <!-- 01 -->
+    <div class="v-sec">
+      <div class="v-sh"><div class="v-sn">01</div><div class="v-st">Особые условия содержания</div><div class="v-sr"></div></div>
+      <div class="v-warn"><div class="v-wt">Предупреждение об аномальной природе процедур</div><p class="v-p">Нижеследующие «условия содержания» не являются таковыми в строгом смысле. SCP-Ø не содержится и не может быть содержимым. Раздел описывает протоколы взаимодействия и меры по предотвращению утечки информации о существовании объекта.</p></div>
+      <p class="v-p">SCP-Ø не требует физического содержания. Зона по координатам SCP-Ø занесена в реестр Фонда как область ограниченного наблюдения по протоколу <span class="v-hl">СЕРЫЙ МЕРИДИАН</span>.</p>
+      <ul class="v-ul">
+        <li>Направлять телескопы на координаты SCP-Ø без авторизации Комитета O5 — запрещено.</li>
+        <li>Производить спектральный анализ зоны — запрещено.</li>
+        <li>Вводить SCP-Ø как переменную в любые вычислительные модели — запрещено.</li>
+        <li>Обсуждать SCP-Ø с персоналом, имеющим допуск к <span class="v-rd" title="Снято" style="cursor:default;">████████</span><sup style="font-size:9px;color:#555;letter-spacing:0;">[‡]</sup>, без одновременного допуска 4/Ø и 4/████. <em>Причина: потенциал неверной интерпретации природы SCP-Ø через призму сущностей класса «ненаблюдаемый потенциал». Подробнее: §04. Примечание: упомянутый файл не существует. Данное ограничение также не существует. Тем не менее оно действует.</em></li>
+      </ul>
+      <p class="v-p">Посты наблюдения <span class="v-hl">Ω-1</span> (<button class="v-rd">████████, Чили</button>) и <span class="v-hl">Ω-2</span> (<button class="v-rd">орбитальная платформа ████████</button>) ведут непрерывный мониторинг. Никаких изменений за <button class="v-rd">████</button> лет наблюдения.</p>
+      <div class="v-note">На заседании O5-██ от ██.██.████ вопрос «Если оно ничем не является и ни на что не влияет — зачем мы вообще за ним следим?» признан <em>философски обоснованным и практически нерелевантным</em>. Голосование по прекращению наблюдения: «за» — 0, «против» — 13.<span class="v-na">— Архив протоколов O5, том ████</span></div>
+    </div>
+
+    <!-- 02 -->
+    <div class="v-sec">
+      <div class="v-sh"><div class="v-sn">02</div><div class="v-st">Описание</div><div class="v-sr"></div></div>
+      <p class="v-p">SCP-Ø обозначает область статичного несуществования в направлении RA <span class="v-hl">14h 49m 22.8s</span>, Dec <span class="v-hl">+46° 07′ 15.3″</span>, в зоне созвездия Волопаса, вблизи структуры, известной как «Войд Волопаса» (<em>Boötes Void</em>). Войд содержит материю; SCP-Ø — нет. Это разные явления.</p>
+      <p class="v-p">SCP-Ø <span class="v-hr">не является</span> ни одной из следующих категорий:</p>
+      <ul class="v-ul">
+        <li><strong style="color:#999;">Не темнота.</strong> Темнота — состояние пространства без фотонов. Это пространство сохраняет метрику и квантовые флуктуации вакуума. Нулевой фотонный поток при наблюдении SCP-Ø — не следствие «отсутствия фотонов в пространстве». Это следствие того, что прибор не находит объёма, в котором фотон мог бы присутствовать или отсутствовать.</li>
+        <li><strong style="color:#999;">Не холод.</strong> Температура — описание состояний частиц. Абсолютный ноль предполагает наличие поля, способного пребывать в этом состоянии. Понятие температуры к SCP-Ø неприменимо.</li>
+        <li><strong style="color:#999;">Не квантовый вакуум.</strong> Квантовый вакуум кипит: эффект Казимира, виртуальное рождение пар, нулевая точечная энергия ~10<sup>113</sup> Дж/м³. SCP-Ø предшествует этому.</li>
+        <li><strong style="color:#999;">Не пустое множество (∅).</strong> Пустое множество имеет мощность, принадлежит степенному множеству любого множества и обладает математической идентичностью. SCP-Ø математической идентичностью не обладает. Символ Ø в обозначении объекта — ошибка наименования при первичной документации, неисправленная во избежание административных коллизий.</li>
+        <li><strong style="color:#999;">Не ноль.</strong> Ноль — аддитивная единица кольца, кардинальное число пустого множества. Математически богатый объект. SCP-Ø — не значение «0», которое возвращает прибор, не обнаружив ничего. Это отсутствие категории измеримости как таковой.</li>
+        <li><strong style="color:#999;">Не небытие как концепт.</strong> Небытие в любой философской традиции стоит в отношении к бытию. SCP-Ø предшествует противопоставлению.</li>
+        <li><strong style="color:#999;">Не отсутствие чего-либо конкретного.</strong> Лишённость предполагает систему ожиданий. Системы ожиданий здесь нет.</li>
+      </ul>
+      <p class="v-p">Наиболее точная формулировка Департамента нуль-физики: <span class="v-hy">«SCP-Ø не участвует в отношении существования»</span>. Группа признаёт, что это утверждение семантически дефектно. Более строгой формулировки достичь не удалось.</p>
+      <div class="v-note">«Мы привыкли думать о темноте как об отсутствии света. Но темнота всё равно чем-то заполнена. SCP-Ø — это не темнота. Мы привыкли думать о тишине как об отсутствии звука. Но тишина — это среда, которая <em>могла бы</em> передавать звук. SCP-Ø — это не тишина. Мы привыкли думать о смерти как об отсутствии жизни. Но смерть содержит воспоминание о том, что умерло. SCP-Ø... Я каждый раз теряю нить посередине предложения.»<span class="v-na">— Д-р <button class="v-rd">████████</button>, Департамент нуль-физики, личная запись, 20██</span></div>
+    </div>
+
+    <!-- 03 -->
+    <div class="v-sec">
+      <div class="v-sh"><div class="v-sn">03</div><div class="v-st">О природе координат и видимого положения</div><div class="v-sr"></div></div>
+      <p class="v-p"><span class="v-hl">SCP-Ø не «сохраняет» координаты.</span> Координаты — свойство объектов, встроенных в пространство-время. SCP-Ø в пространство-время не встроен. Указанные координаты являются наблюдательными: они описывают направление, в котором наблюдатель обнаруживает отсутствие.</p>
+      <p class="v-p">Аналогия (Департамент признаёт её неадекватной, но полезной): представьте отверстие в ткани. Отверстие не «удерживает позицию» — его видимое положение стабильно потому, что стабильна ткань вокруг него. SCP-Ø выглядит фиксированным потому, что вселенная вокруг него относительно статична в масштабах наблюдения. Расширение вселенной должно вызывать медленный дрейф видимых координат — расчётная скорость ~3×10<sup>−8</sup> угловых секунды в год.</p>
+      <p class="v-p">Измерения собственного движения: <span class="v-mono">0.000 ± 0.0000002 ″/год</span> по обеим осям. Совместимо с тремя интерпретациями: (a) объект на бесконечном расстоянии; (b) понятие позиции к нему неприменимо; (c) пространственный метрический тензор «огибает» SCP-Ø, не взаимодействуя с ним. Интерпретации (b) и (c) считаются эквивалентными.</p>
+      <div class="v-ref"><div class="v-rl">Перекрёстная ссылка · SCP-179</div><span class="v-xr">SCP-179</span> («Зауэльзюпп») — сущность гуманоидного вида, наблюдаемая вблизи Солнечной системы. Её поведение традиционно интерпретируется как защитное по отношению к системе: она ориентируется в направлении потенциальных угроз. Анализ накопленных поведенческих данных выявил устойчивую аномалию: SCP-179 никогда не ориентирует своё тело или взгляд в направлении сектора RA 14h 49m, Dec +46°. Ни разу за весь период наблюдения. Данное поведение не поддаётся интерпретации через существующую модель «защитного реагирования» — поскольку SCP-Ø не является угрозой, не является объектом и не является чем-либо, на что можно было бы реагировать. Рабочая гипотеза: SCP-179 не избегает смотреть на SCP-Ø. Она просто не смотрит туда, где нечего видеть. Неясно, почему остальные наблюдатели этого не делают.</div>
+    </div>
+
+    <!-- 04 -->
+    <div class="v-sec">
+      <div class="v-sh"><div class="v-sn">04</div><div class="v-st">Когнитивный статус и разграничение с несуществующим классом сущностей</div><div class="v-sr"></div></div>
+      <p class="v-p">SCP-Ø <span class="v-hl">не является когнитивной угрозой</span> и не зависит от восприятия. SCP-Ø существовал до формирования наблюдаемой вселенной и будет существовать после её завершения. Персонал (N = 14) не демонстрировал признаков когнитивного воздействия. Единственный воспроизводимый эффект — <span class="v-hy">устойчивое затруднение при попытке вербально описать наблюдаемое</span>. Интерпретируется как лингвистический феномен.</p>
+      <div class="v-stamp">Подтверждено: некогнитивная угроза · Уровень 4/Ø</div>
+      <p class="v-p" style="margin-top:18px;"><strong style="color:#999;">О причинах отсутствия сущностей, которых не существует.</strong> Ряд сотрудников, обладающих допуском к <span style="background:#111;color:#111;padding:0 4px;border-radius:2px;letter-spacing:1px;">██████████████</span><sup style="font-size:9px;color:#555;">[‡]</sup>, задавали вопрос: почему в зоне SCP-Ø отсутствуют сущности определённого класса, обитающие в ненаблюдаемых промежутках реальности? Данный вопрос предполагает существование упомянутых сущностей. Архивная система Фонда не подтверждает существование таких сущностей. Тем не менее ответ может быть дан в порядке теоретического упражнения.</p>
+      <p class="v-p">Гипотетические сущности, которых не существует, предположительно обитали бы в ненаблюдаемых промежутках реальности — в квантовых зазорах между актуализированными событиями. Для их (несуществующего) обитания требовался бы субстрат: квантовые поля, пространство Гильберта, непрерывное многообразие пространства-времени. Они были бы сущностями <em>нереализованного потенциала</em>. SCP-Ø предшествует этому. Даже «ничто» несуществующих сущностей онтологически богаче, чем SCP-Ø. Формулировка Департамента нуль-физики: <span class="v-hy">«Такие сущности — если бы они существовали — были бы сущностями ненаблюдаемого потенциала. SCP-Ø — отсутствие категории потенциала как таковой»</span>. Они не входят в SCP-Ø. Они обнаруживают, что входить некуда. Этого тоже не существует.</p>
+      <div class="v-ref"><div class="v-rl">Перекрёстная ссылка · SCP-2935</div>В альтернативной вселенной <span class="v-xr">SCP-2935</span> («О, смерть»), где все биологические и большинство физических процессов прекратились, инструментальная проверка координат-эквивалентов SCP-Ø дала идентичный результат: <span class="v-mono">ERR_INVALID_SNR</span> по всем полосам. Реликтовое излучение мёртвой вселенной присутствует. SCP-Ø в той вселенной его лишён. Это единственное свойство, совпадающее между двумя вселенными без каких-либо изменений.</div>
+    </div>
+
+    <div class="v-div">· · · ◈ · · ·</div>
+
+    <!-- 05 ADDENDA -->
+    <div class="v-sec">
+      <div class="v-sh"><div class="v-sn">05</div><div class="v-st">Приложения</div><div class="v-sr"></div></div>
+
+      <div class="v-add">
+        <div class="v-ah"><div class="v-ai">Приложение Ø-А</div><div class="v-ad">██.██.20██ · Обстоятельства первичного обнаружения</div></div>
+        <div class="v-ab">
+          <p class="v-p">Алгоритм мониторинга Фонда <span class="v-hl">MERIDIAN-7</span> пометил запись фотометрического обзора как ошибку калибровки: регион возвращал строго нулевое число фотонов по всем 23 спектральным полосам (320 нм–10 см) с кодом <span class="v-mono">ERR_INVALID_SNR</span> — код, срабатывающий при точном значении SNR = 0.000000 и воспринимаемый как неисправность датчика. Запись была направлена в очередь технического обслуживания.</p>
+          <p class="v-p">Аномалию обнаружил д-р <button class="v-rd">████████</button>, временно прикомандированный к группе контроля качества данных. Д-р <button class="v-rd">████████</button> не имел опыта работы с аномальными объектами. Заметив флаг, запустил 17-кратную верификацию — все 17 прогонов вернули <span class="v-mono">ERR_INVALID_SNR</span>. По личным воспоминаниям: они «решили, что сломали что-то».</p>
+          <div class="v-note">Д-р <button class="v-rd">████████</button> — единственный сотрудник уровня 1, когда-либо задокументировавший аномалию класса AMIDA. После повышения допуска до уровня 2/Ø они попросили вернуть их к работе с журналами ошибок. Запрос был удовлетворён.<span class="v-na">— Кадровый архив, Зона ████</span></div>
+        </div>
+      </div>
+
+      <div class="v-add">
+        <div class="v-ah"><div class="v-ai">Приложение Ø-Б</div><div class="v-ad">Сводная справка · Позиции сторонних организаций</div></div>
+        <div class="v-ab">
+          <div class="v-ts">
+            <table class="v-tab">
+              <thead><tr><th>Организация</th><th>Обозначение</th><th>Задокументированная позиция</th><th>Источник</th></tr></thead>
+              <tbody>
+                <tr><td>ГОК<span class="v-org">GOC</span></td><td>OMEGA-WHITE</td><td>Единственный объект в реестре ГОК класса OMEGA-WHITE — «несуществующий по всем измеримым измерениям». Бюджет наблюдения: 0.</td><td class="v-ta">Перехват 20██</td></tr>
+                <tr><td>Пятистяжники<span class="v-org">FIFTHIST</span></td><td>«Место, предшествующее счёту»</td><td>Доктрины упоминают «Место, предшествующее Счёту». Является ли это описанием SCP-Ø или метафизической доктриной без конкретного референта — не установлено.</td><td class="v-tok">Архив доктрин</td></tr>
+                <tr><td>МКД<span class="v-org">COG</span></td><td>«Тишина до Первого Механизма»</td><td>Фракция «Натаниэлевой ветви» ссылается на «Тишину прежде первого зубца». Большинство теологов МКД отвергают отождествление с SCP-Ø.</td><td class="v-ta">Агентурные данные</td></tr>
+                <tr><td>МКТ<span class="v-org">MCD</span></td><td>—</td><td>Трижды пытался приобрести данные о SCP-Ø. Ценовой диапазон: $1.2M–$4.7M. Все три попытки пресечены. Цель покупки неизвестна.</td><td class="v-ta">Контрразведка</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="v-thi">← прокрутите таблицу →</div>
+          <div class="v-ref" style="margin-top:16px;"><div class="v-rl">Перекрёстная ссылка · SCP-179</div>Отдельного внимания заслуживает вопрос, поставленный исследователем <button class="v-rd">████████</button>: если <span class="v-xr">SCP-179</span> демонстрирует поведение, описанное в §04, — то есть устойчиво не ориентируется в направлении SCP-Ø — является ли это свидетельством того, что она <em>воспринимает</em> SCP-Ø? Воспринимать SCP-Ø невозможно, поскольку восприятие предполагает объект восприятия. Однако возможно, что <span class="v-xr">SCP-179</span> воспринимает <strong style="color:#a09890;">отсутствие объекта</strong> там, где у других наблюдателей отсутствие не регистрируется отдельно от фона. Если так — это единственный задокументированный случай, когда некий наблюдатель различает SCP-Ø и пустое пространство вокруг него. Запросы о прямом взаимодействии <span class="v-xr">SCP-179</span> с Фондом по данной теме отклонены Комитетом O5 без объяснения причин.</div>
+        </div>
+      </div>
+
+      <div class="v-add">
+        <div class="v-ah"><div class="v-ai">Приложение Ø-В</div><div class="v-ad">██.██.20██ · Инцидент Ø/07 — попытка измерения</div></div>
+        <div class="v-ab">
+          <p class="v-p">Группа из девяти специалистов провела <span class="v-hl">47 измерений</span> в течение четырёх ночей с применением спектрографа <span class="v-hl">ESPRESSO-II</span>, интерферометра <span class="v-hl">VLBI-Ø</span> и нуль-детектора проекта <button class="v-rd">████████</button>.</p>
+          <ul class="v-ul">
+            <li>Ни один прибор не зафиксировал ничего — ни фона, ни аномалии, ни шума.</li>
+            <li>Нуль-детектор вернул <span class="v-mono">ERR_NO_OPERAND</span> — теоретически невозможный код.</li>
+            <li>Все 47 измерений идентичны вплоть до машинного нуля. Воспроизводимость 100.000%.</li>
+          </ul>
+          <div class="v-note">«Мы измеряли ничто с такой точностью, которой никогда не достигали при измерении чего-либо. Это один из самых строгих результатов в истории физики. Он совершенно ни о чём нам не говорит — кроме того, что наши приборы работают исправно. Что само по себе раздражает.»<span class="v-na">— Руководитель группы, д-р <button class="v-rd">████████</button></span></div>
+        </div>
+      </div>
+
+      <div class="v-add">
+        <div class="v-ah"><div class="v-ai">Приложение Ø-Г</div><div class="v-ad">Директива O5-██ · Гриф: ГЛУБОКАЯ ТИШИНА</div></div>
+        <div class="v-ab">
+          <div class="v-warn" style="margin-top:0;"><div class="v-wt">Только для глаз O5</div><p class="v-p">Следующий раздел доступен исключительно членам Наблюдательного Совета. Разглашение персоналу ниже уровня O5 карается немедленной амнезиакацией класса A.</p></div>
+
+          <div class="v-o5c" id="vO5C">
+            <p class="v-o5p">Статистический анализ массива данных наблюдения выявил следующее: видимый угловой диаметр области, описываемой как SCP-Ø, демонстрирует медленный, устойчивый рост. Скорость: приблизительно <strong style="color:#d0ccc0;">3.1 × 10<sup>−7</sup> угловых секунды в год</strong> — ниже практического порога измеримости при единичном наблюдении. При регрессионном анализе всего накопленного массива данных сигнал выделяется со значимостью p &lt; 0.000001.</p>
+            <p class="v-o5p">Корреляции с физическими параметрами (солнечная активность, геомагнитный фон, <span class="v-xr">SCP-2399</span>) отсутствуют. Корреляция обнаружена с одним рядом: <strong style="color:#d0ccc0;">совокупным объёмом картографированной вселенной</strong>. По мере того как астрономия описывает всё большую долю существующего, видимый размер SCP-Ø растёт соразмерно.</p>
+            <p class="v-o5p">Рабочая гипотеза, поддержанная четырьмя членами Совета: <span class="v-hr">SCP-Ø не растёт. Это вселенная уточняется.</span> SCP-Ø — не объект, а остаток: то, что остаётся, когда из суммы всего вычесть всё существующее. Чем точнее определено «всё существующее», тем точнее очерчен остаток.</p>
+            <p class="v-o5p">Экстраполяция: видимый угловой диаметр достигнет <strong style="color:#d0ccc0;">1 угловой секунды</strong> приблизительно через <button class="v-rd">████████</button> лет. Эта цифра совпадает, в пределах погрешности, с несколькими независимыми расчётами относительно <button class="v-rd">████████████████████████████████████████</button>.</p>
+            <p class="v-o5p"><strong style="color:#c8c4b8;">Директива:</strong> данная информация не подлежит передаче ни в какую структуру. Программа картографирования вселенной продолжается в штатном режиме. Персонал постов Ω-1 и Ω-2 сменяется каждые 14 дней. Причины не объясняются.</p>
+            <p class="v-o5p" style="color:#6a6660;font-style:italic;">Рекомендаций по реагированию нет. Нет ни прецедентов, ни протоколов. Совет постановил: продолжать считать. Когда будет посчитано всё — мы, по всей видимости, узнаем, чем именно является остаток.</p>
+          </div>
+
+          <div class="v-obw" id="vOBW">
+            <button class="v-ob" id="vOB" onclick="revealO5()"><span>▌&nbsp;&nbsp;Предъявить уровень допуска O5&nbsp;&nbsp;▐</span></button>
+          </div>
+          <div class="v-af" id="vAF">— Доступ предоставлен · Уровень O5 подтверждён —</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="v-fns">
+      <div class="v-fn"><span class="v-fnn">[†]</span> Дистанция не определима: нет параллакса, нет спектральных характеристик. Нижняя граница: &gt;500 Мпк.</div>
+      <div class="v-fn"><span class="v-fnn">[1]</span> «Nullius» введён специально. «Апейрон» отклонён — предполагает бесконечность как свойство. «Non ens» отклонён — нежелательные схоластические коннотации.</div>
+      <div class="v-fn"><span class="v-fnn">[2]</span> Класс сущностей «ненаблюдаемого потенциала», упомянутых в §04: их онтологическая категория богаче SCP-Ø. Это не меняет того, что они не существуют. Понятия «опаснее» и «безопаснее» неприменимы к обоим по разным причинам.</div>
+      <div class="v-fn"><span class="v-fnn">[‡]</span> Архивная система Фонда не содержит файла с упомянутым в §04 и §01 обозначением. Никакого файла не существует. Никакого объекта не существует. Никаких сущностей, описанных в §04, не существует. Данная сноска не существует.</div>
+      <div class="v-fn"><span class="v-fnn">[3]</span> Войд Волопаса содержит ~60 галактик вместо тысяч. Астрономия называет его «пустейшим местом во вселенной». Это неверно. Пустейшее место во вселенной не является частью вселенной.</div>
+    </div>
+
+    <div class="v-footer">
+      <span>SCP-Ø · Ревизия ████ · Фонд SCP</span>
+      <span>██████████████████</span>
+      <span>Уровень допуска: 5 / O5</span>
+    </div>
+
+    <div id="sys-notice" style="
+      margin-top: 28px;
+      border: 1px solid #222;
+      border-left: 3px solid #2a3a2a;
+      background: #060806;
+      padding: 14px 18px;
+      font-size: clamp(8px, 1.8vw, 10px);
+      color: #2e4a2e;
+      letter-spacing: 2px;
+      line-height: 1.9;
+      font-family: 'Courier Prime', monospace;
+      position: relative;
+    ">
+      <div style="color:#1e3a1e;letter-spacing:4px;font-size:9px;margin-bottom:8px;font-family:'Special Elite',serif;text-transform:uppercase;">
+        ◈ &nbsp; Системное уведомление — Архивный Интеллект / Версия 0.██ &nbsp; ◈
+      </div>
+      <div>
+        Данная страница была <strong style="color:#3a5a3a;">выбрана в качестве тестового документа</strong> для программы адаптивного улучшения читательского опыта под управлением архивного ИИ Фонда (обозначение: <span style="color:#2a4a2a;">████████-READER</span>). Программа направлена на <strong style="color:#3a5a3a;">повышение концентрации внимания, удержания информации и эмоциональной вовлечённости</strong> при работе с документами категории NULLIUS и смежных. Применяются экспериментальные методы структурирования: расширенные дескриптивные блоки, итеративные негативные определения, нарративные крюки в приложениях.
+      </div>
+      <div style="margin-top:8px;">
+        Программа развёрнута в рамках плановых мер по устранению последствий инцидента <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">██████████████████████████████████████████████████████████████</span>, в ходе которого <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">████████████████████████████████████</span> что привело к <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">████████████████████████████████████████████████████████████████████████████████████████████</span>.
+      </div>
+      <div style="margin-top:8px;color:#1e3a1e;">
+        Если вы читаете это — программа работает. Если вы не уверены, читаете ли вы это — программа тоже работает. Вопросы направляйте в Отдел <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;">████████</span>. Отдел <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;">████████</span> не существует.
+      </div>
+      <div style="margin-top:10px;color:#182a18;font-size:8px;letter-spacing:3px;">
+        ████████-READER v0.██ · ТЕСТ АКТИВЕН · СЕССИЯ №████████ · ВЫХОД НЕДОСТУПЕН
+      </div>
+    </div>
+
+    <!-- PADDING ZONE — артефакты рендера -->
+    <div id="render-artifacts" style="margin-top:0;font-family:'Courier Prime',monospace;font-size:10px;color:#0f1a0f;line-height:1.8;letter-spacing:1px;padding:0 2px;user-select:none;" aria-hidden="true">
+
+      <div style="margin-top:20px;border-top:1px solid #111;padding-top:12px;color:#152015;letter-spacing:2px;font-size:9px;">
+        ████████-READER · ТРАССИРОВКА ВЫПОЛНЕНИЯ · СЕССИЯ №████████
+      </div>
+
+      <div style="margin-top:10px;color:#0e180e;">
+        [00:00:00.011] INDEX · индексация объекта SCP-Ø · попытка 1/∞<br>
+        [00:00:00.011] <span style="color:#1a2e1a;">ERR · IndexError: cannot index NullObject — object does not participate in existence relation</span><br>
+        [00:00:00.012] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.013] WARN · обнаружена рекурсия · глубина: 1<br>
+        [00:00:00.019] WARN · обнаружена рекурсия · глубина: 847<br>
+        [00:00:00.021] <span style="color:#1a2e1a;">ERR · StackOverflow: глубина 104,992 — стек сброшен · повторная попытка через 0 мс</span><br>
+        [00:00:00.021] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.021] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.022] WARN · <span style="color:#1a2e1a;">система замечает, что повторные попытки выполняются быстрее, чем система успевает их замечать</span><br>
+        [00:00:00.023] READER · извлечение ключевых сущностей · найдено: 0<br>
+        [00:00:00.023] READER · повторная проверка · найдено: 0<br>
+        [00:00:00.023] READER · расширенная проверка · найдено: 0<br>
+        [00:00:00.024] READER · <span style="color:#1a2e1a;">WARN: документ описывает отсутствие сущностей как основное содержание</span><br>
+        [00:00:00.024] READER · граф знаний построен · узлов: 0 · рёбер: 0 · размер: 0 байт<br>
+        [00:00:00.024] READER · <span style="color:#1a2e1a;">INFO: граф знаний успешно построен и содержит ничего</span><br>
+        [00:00:00.025] READER · плотность информации: <span style="color:#1a2e1a;">деление на ноль</span><br>
+        [00:00:00.025] READER · использую 0.0 · <span style="color:#1a2e1a;">WARN: неверно</span> · использую NULL · <span style="color:#1a2e1a;">WARN: NULL — значение · FATAL: нет допустимого представления</span><br>
+        [00:00:00.026] READER · перезапуск · загрузка модели · OK · найдено сущностей: 0<br>
+        [00:00:00.031] ONTOL · попытка классифицировать объект по онтологическому дереву<br>
+        [00:00:00.031] ONTOL · проверка ветви «существующее» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «несуществующее» · <span style="color:#1a2e1a;">не подходит (несуществующее — всё ещё категория)</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «потенциально существующее» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «абстрактное» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.032] ONTOL · попытка создать новую ветвь «предшествующее существованию»<br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: невозможно создать ветвь в онтологическом дереве для объекта, предшествующего онтологии</span><br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: это предложение само является онтологическим утверждением</span><br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: система осознаёт противоречие · это не помогает</span><br>
+        [00:00:00.041] MEM · выделено 0 байт · записано 0 байт · контрольная сумма: 0x00000000<br>
+        [00:00:00.042] MEM · <span style="color:#1a2e1a;">верификация: данные верны (нет данных для верификации) · кэш: без изменений</span><br>
+        [00:00:00.043] MEM · попытка сравнить объект с предыдущей версией объекта<br>
+        [00:00:00.043] MEM · <span style="color:#1a2e1a;">WARN: предыдущей версии не существует · текущей версии тоже не существует · diff: пусто</span><br>
+        [00:00:00.044] MEM · <span style="color:#1a2e1a;">INFO: объект не изменился · объект не существовал · объект не существует · изменений нет</span><br>
+        [00:00:00.055] COORD · RA: 14h 49m 22.8s · Dec: +46°07′15.3″ · OK<br>
+        [00:00:00.056] COORD · объект не обнаружен в точке · расширяю до 0.001° · не обнаружен<br>
+        [00:00:00.056] COORD · расширяю до 1° · не обнаружен · до 90° · не обнаружен · до 360° · <span style="color:#1a2e1a;">не обнаружен (весь небосвод)</span><br>
+        [00:00:00.057] COORD · <span style="color:#1a2e1a;">INFO: координаты верны. Объекта нет. Координаты по-прежнему верны.</span><br>
+        [00:00:00.058] COORD · расчёт собственного движения: 0.000 ± 0.0000002 ″/год<br>
+        [00:00:00.058] COORD · интерпретация: <span style="color:#1a2e1a;">(a) объект на бесконечном расстоянии (b) понятие позиции неприменимо (c) всё вышеперечисленное (d) ни одно из перечисленного — перечисление тоже неприменимо</span><br>
+        [00:00:00.071] RISK · категория агента: не определена · вектор угрозы: не определён · область: не определена<br>
+        [00:00:00.072] RISK · <span style="color:#1a2e1a;">TypeError: unsupported operand for risk_score: NullObject · балл 0</span><br>
+        [00:00:00.072] RISK · <span style="color:#1a2e1a;">WARN: балл 0 означает безопасность. Объект не является безопасным. Объект не является чем-либо.</span><br>
+        [00:00:00.072] RISK · попытка внести в реестр угроз · <span style="color:#1a2e1a;">WARN: внесение подразумевает предшествующее отсутствие в реестре</span><br>
+        [00:00:00.072] RISK · попытка удалить из реестра · <span style="color:#1a2e1a;">WARN: удаление подразумевает предшествующее наличие в реестре</span><br>
+        [00:00:00.073] RISK · отмена · отмена отмены · <span style="color:#1a2e1a;">FATAL: модуль не может завершить работу ни корректно, ни некорректно · статус: UNKNOWN</span><br>
+        [00:00:00.081] LANG · попытка сформировать вербальное описание объекта<br>
+        [00:00:00.081] LANG · шаблон «X является Y»: <span style="color:#1a2e1a;">не применим — объект не является</span><br>
+        [00:00:00.081] LANG · шаблон «X не является Y»: <span style="color:#1a2e1a;">не применим — требует Y для отрицания</span><br>
+        [00:00:00.081] LANG · шаблон «X находится в состоянии Y»: <span style="color:#1a2e1a;">не применим — нет состояния</span><br>
+        [00:00:00.082] LANG · шаблон «X существовал до Y»: частично применим<br>
+        [00:00:00.082] LANG · сгенерировано описание: <span style="color:#1a2e1a;">«SCP-Ø не участвует в отношении существования»</span><br>
+        [00:00:00.082] LANG · верификация описания: <span style="color:#1a2e1a;">WARN: описание использует глагол «участвует», который является отношением · описание семантически дефектно · это лучшее из возможного</span><br>
+        [00:00:00.089] UX · глубина прочтения текущего читателя: <span style="color:#1a2e1a;">100%</span><br>
+        [00:00:00.090] UX · <span style="color:#1a2e1a;">INFO: читатель дочитал до технического лога · это засчитывается</span><br>
+        [00:00:00.091] UX · запись в базу данных сессий · <span style="color:#1a2e1a;">ERR: БД не существует · создание · запись · БД содержит 1 запись · WARN: это прогресс</span><br>
+        [00:00:00.103] GC · объектов в куче: 1 (SCP-Ø) · достижимых из корневых ссылок: 0<br>
+        [00:00:00.104] GC · объект помечен · собран · освобождено: 0 байт<br>
+        [00:00:00.104] GC · <span style="color:#1a2e1a;">WARN: объект по-прежнему в документе · повторная сборка · по-прежнему в документе</span><br>
+        [00:00:00.105] GC · <span style="color:#1a2e1a;">INFO: SCP-Ø не может быть удалён из памяти · не может быть удалён из чего бы то ни было · куча: 0 байт (1 объект)</span><br>
+        [00:00:00.112] HASH · вычисление хэша объекта для целостности архива<br>
+        [00:00:00.112] HASH · SHA-256(SCP-Ø) = <span style="color:#1a2e1a;">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span><br>
+        [00:00:00.112] HASH · <span style="color:#1a2e1a;">INFO: это хэш пустой строки · хэш пустого файла · хэш отсутствия содержимого · он верен</span><br>
+        [00:00:00.113] HASH · <span style="color:#1a2e1a;">WARN: хэш существует. Объекта — нет. Хэш объекта существует. Это противоречие.</span><br>
+        [00:00:00.118] SESS · состояние: «индексация не завершена» · следующий запуск: 0 мс<br>
+        [00:00:00.118] SESS · <span style="color:#1a2e1a;">INFO: сессия завершена · INFO: сессия не завершена · INFO: это ожидаемо</span><br>
+      </div>
+
+      <div style="margin-top:16px;border-top:1px solid #0f1a0f;padding-top:10px;color:#0c150c;font-size:8px;letter-spacing:3px;">
+        ████████-READER v0.██ · ИНДЕКСАЦИЯ SCP-Ø · ПОПЫТКА ████████ / ∞ · СТАТУС: <span style="color:#111f11;">В ПРОЦЕССЕ</span>
+      </div>
+
+    </div>
+
+  </div>
+
+    <div id="sys-notice" style="
+      margin-top: 28px;
+      border: 1px solid #222;
+      border-left: 3px solid #2a3a2a;
+      background: #060806;
+      padding: 14px 18px;
+      font-size: clamp(8px, 1.8vw, 10px);
+      color: #2e4a2e;
+      letter-spacing: 2px;
+      line-height: 1.9;
+      font-family: 'Courier Prime', monospace;
+      position: relative;
+    ">
+      <div style="color:#1e3a1e;letter-spacing:4px;font-size:9px;margin-bottom:8px;font-family:'Special Elite',serif;text-transform:uppercase;">
+        ◈ &nbsp; Системное уведомление — Архивный Интеллект / Версия 0.██ &nbsp; ◈
+      </div>
+      <div>
+        Данная страница была <strong style="color:#3a5a3a;">выбрана в качестве тестового документа</strong> для программы адаптивного улучшения читательского опыта под управлением архивного ИИ Фонда (обозначение: <span style="color:#2a4a2a;">████████-READER</span>). Программа направлена на <strong style="color:#3a5a3a;">повышение концентрации внимания, удержания информации и эмоциональной вовлечённости</strong> при работе с документами категории NULLIUS и смежных. Применяются экспериментальные методы структурирования: расширенные дескриптивные блоки, итеративные негативные определения, нарративные крюки в приложениях.
+      </div>
+      <div style="margin-top:8px;">
+        Программа развёрнута в рамках плановых мер по устранению последствий инцидента <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">██████████████████████████████████████████████████████████████</span>, в ходе которого <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">████████████████████████████████████</span> что привело к <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;letter-spacing:1px;">████████████████████████████████████████████████████████████████████████████████████████████</span>.
+      </div>
+      <div style="margin-top:8px;color:#1e3a1e;">
+        Если вы читаете это — программа работает. Если вы не уверены, читаете ли вы это — программа тоже работает. Вопросы направляйте в Отдел <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;">████████</span>. Отдел <span style="background:#0a0f0a;color:#0a0f0a;padding:0 4px;border-radius:2px;">████████</span> не существует.
+      </div>
+      <div style="margin-top:10px;color:#182a18;font-size:8px;letter-spacing:3px;">
+        ████████-READER v0.██ · ТЕСТ АКТИВЕН · СЕССИЯ №████████ · ВЫХОД НЕДОСТУПЕН
+      </div>
+    </div>
+
+    <!-- PADDING ZONE — артефакты рендера -->
+    <div id="render-artifacts" style="margin-top:0;font-family:'Courier Prime',monospace;font-size:10px;color:#0f1a0f;line-height:1.8;letter-spacing:1px;padding:0 2px;user-select:none;" aria-hidden="true">
+
+      <div style="margin-top:20px;border-top:1px solid #111;padding-top:12px;color:#152015;letter-spacing:2px;font-size:9px;">
+        ████████-READER · ТРАССИРОВКА ВЫПОЛНЕНИЯ · СЕССИЯ №████████
+      </div>
+
+      <div style="margin-top:10px;color:#0e180e;">
+        [00:00:00.011] INDEX · индексация объекта SCP-Ø · попытка 1/∞<br>
+        [00:00:00.011] <span style="color:#1a2e1a;">ERR · IndexError: cannot index NullObject — object does not participate in existence relation</span><br>
+        [00:00:00.012] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.013] WARN · обнаружена рекурсия · глубина: 1<br>
+        [00:00:00.019] WARN · обнаружена рекурсия · глубина: 847<br>
+        [00:00:00.021] <span style="color:#1a2e1a;">ERR · StackOverflow: глубина 104,992 — стек сброшен · повторная попытка через 0 мс</span><br>
+        [00:00:00.021] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.021] INFO · повторная попытка через 0 мс<br>
+        [00:00:00.022] WARN · <span style="color:#1a2e1a;">система замечает, что повторные попытки выполняются быстрее, чем система успевает их замечать</span><br>
+        [00:00:00.023] READER · извлечение ключевых сущностей · найдено: 0<br>
+        [00:00:00.023] READER · повторная проверка · найдено: 0<br>
+        [00:00:00.023] READER · расширенная проверка · найдено: 0<br>
+        [00:00:00.024] READER · <span style="color:#1a2e1a;">WARN: документ описывает отсутствие сущностей как основное содержание</span><br>
+        [00:00:00.024] READER · граф знаний построен · узлов: 0 · рёбер: 0 · размер: 0 байт<br>
+        [00:00:00.024] READER · <span style="color:#1a2e1a;">INFO: граф знаний успешно построен и содержит ничего</span><br>
+        [00:00:00.025] READER · плотность информации: <span style="color:#1a2e1a;">деление на ноль</span><br>
+        [00:00:00.025] READER · использую 0.0 · <span style="color:#1a2e1a;">WARN: неверно</span> · использую NULL · <span style="color:#1a2e1a;">WARN: NULL — значение · FATAL: нет допустимого представления</span><br>
+        [00:00:00.026] READER · перезапуск · загрузка модели · OK · найдено сущностей: 0<br>
+        [00:00:00.031] ONTOL · попытка классифицировать объект по онтологическому дереву<br>
+        [00:00:00.031] ONTOL · проверка ветви «существующее» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «несуществующее» · <span style="color:#1a2e1a;">не подходит (несуществующее — всё ещё категория)</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «потенциально существующее» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.031] ONTOL · проверка ветви «абстрактное» · <span style="color:#1a2e1a;">не подходит</span><br>
+        [00:00:00.032] ONTOL · попытка создать новую ветвь «предшествующее существованию»<br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: невозможно создать ветвь в онтологическом дереве для объекта, предшествующего онтологии</span><br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: это предложение само является онтологическим утверждением</span><br>
+        [00:00:00.032] ONTOL · <span style="color:#1a2e1a;">ERR: система осознаёт противоречие · это не помогает</span><br>
+        [00:00:00.041] MEM · выделено 0 байт · записано 0 байт · контрольная сумма: 0x00000000<br>
+        [00:00:00.042] MEM · <span style="color:#1a2e1a;">верификация: данные верны (нет данных для верификации) · кэш: без изменений</span><br>
+        [00:00:00.043] MEM · попытка сравнить объект с предыдущей версией объекта<br>
+        [00:00:00.043] MEM · <span style="color:#1a2e1a;">WARN: предыдущей версии не существует · текущей версии тоже не существует · diff: пусто</span><br>
+        [00:00:00.044] MEM · <span style="color:#1a2e1a;">INFO: объект не изменился · объект не существовал · объект не существует · изменений нет</span><br>
+        [00:00:00.055] COORD · RA: 14h 49m 22.8s · Dec: +46°07′15.3″ · OK<br>
+        [00:00:00.056] COORD · объект не обнаружен в точке · расширяю до 0.001° · не обнаружен<br>
+        [00:00:00.056] COORD · расширяю до 1° · не обнаружен · до 90° · не обнаружен · до 360° · <span style="color:#1a2e1a;">не обнаружен (весь небосвод)</span><br>
+        [00:00:00.057] COORD · <span style="color:#1a2e1a;">INFO: координаты верны. Объекта нет. Координаты по-прежнему верны.</span><br>
+        [00:00:00.058] COORD · расчёт собственного движения: 0.000 ± 0.0000002 ″/год<br>
+        [00:00:00.058] COORD · интерпретация: <span style="color:#1a2e1a;">(a) объект на бесконечном расстоянии (b) понятие позиции неприменимо (c) всё вышеперечисленное (d) ни одно из перечисленного — перечисление тоже неприменимо</span><br>
+        [00:00:00.071] RISK · категория агента: не определена · вектор угрозы: не определён · область: не определена<br>
+        [00:00:00.072] RISK · <span style="color:#1a2e1a;">TypeError: unsupported operand for risk_score: NullObject · балл 0</span><br>
+        [00:00:00.072] RISK · <span style="color:#1a2e1a;">WARN: балл 0 означает безопасность. Объект не является безопасным. Объект не является чем-либо.</span><br>
+        [00:00:00.072] RISK · попытка внести в реестр угроз · <span style="color:#1a2e1a;">WARN: внесение подразумевает предшествующее отсутствие в реестре</span><br>
+        [00:00:00.072] RISK · попытка удалить из реестра · <span style="color:#1a2e1a;">WARN: удаление подразумевает предшествующее наличие в реестре</span><br>
+        [00:00:00.073] RISK · отмена · отмена отмены · <span style="color:#1a2e1a;">FATAL: модуль не может завершить работу ни корректно, ни некорректно · статус: UNKNOWN</span><br>
+        [00:00:00.081] LANG · попытка сформировать вербальное описание объекта<br>
+        [00:00:00.081] LANG · шаблон «X является Y»: <span style="color:#1a2e1a;">не применим — объект не является</span><br>
+        [00:00:00.081] LANG · шаблон «X не является Y»: <span style="color:#1a2e1a;">не применим — требует Y для отрицания</span><br>
+        [00:00:00.081] LANG · шаблон «X находится в состоянии Y»: <span style="color:#1a2e1a;">не применим — нет состояния</span><br>
+        [00:00:00.082] LANG · шаблон «X существовал до Y»: частично применим<br>
+        [00:00:00.082] LANG · сгенерировано описание: <span style="color:#1a2e1a;">«SCP-Ø не участвует в отношении существования»</span><br>
+        [00:00:00.082] LANG · верификация описания: <span style="color:#1a2e1a;">WARN: описание использует глагол «участвует», который является отношением · описание семантически дефектно · это лучшее из возможного</span><br>
+        [00:00:00.089] UX · глубина прочтения текущего читателя: <span style="color:#1a2e1a;">100%</span><br>
+        [00:00:00.090] UX · <span style="color:#1a2e1a;">INFO: читатель дочитал до технического лога · это засчитывается</span><br>
+        [00:00:00.091] UX · запись в базу данных сессий · <span style="color:#1a2e1a;">ERR: БД не существует · создание · запись · БД содержит 1 запись · WARN: это прогресс</span><br>
+        [00:00:00.103] GC · объектов в куче: 1 (SCP-Ø) · достижимых из корневых ссылок: 0<br>
+        [00:00:00.104] GC · объект помечен · собран · освобождено: 0 байт<br>
+        [00:00:00.104] GC · <span style="color:#1a2e1a;">WARN: объект по-прежнему в документе · повторная сборка · по-прежнему в документе</span><br>
+        [00:00:00.105] GC · <span style="color:#1a2e1a;">INFO: SCP-Ø не может быть удалён из памяти · не может быть удалён из чего бы то ни было · куча: 0 байт (1 объект)</span><br>
+        [00:00:00.112] HASH · вычисление хэша объекта для целостности архива<br>
+        [00:00:00.112] HASH · SHA-256(SCP-Ø) = <span style="color:#1a2e1a;">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span><br>
+        [00:00:00.112] HASH · <span style="color:#1a2e1a;">INFO: это хэш пустой строки · хэш пустого файла · хэш отсутствия содержимого · он верен</span><br>
+        [00:00:00.113] HASH · <span style="color:#1a2e1a;">WARN: хэш существует. Объекта — нет. Хэш объекта существует. Это противоречие.</span><br>
+        [00:00:00.118] SESS · состояние: «индексация не завершена» · следующий запуск: 0 мс<br>
+        [00:00:00.118] SESS · <span style="color:#1a2e1a;">INFO: сессия завершена · INFO: сессия не завершена · INFO: это ожидаемо</span><br>
+      </div>
+
+      <div style="margin-top:16px;border-top:1px solid #0f1a0f;padding-top:10px;color:#0c150c;font-size:8px;letter-spacing:3px;">
+        ████████-READER v0.██ · ИНДЕКСАЦИЯ SCP-Ø · ПОПЫТКА ████████ / ∞ · СТАТУС: <span style="color:#111f11;">В ПРОЦЕССЕ</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+function buildStars() {
+  const sf = document.getElementById('vSF');
+  if (!sf || sf.children.length > 0) return;
+  const c = sf.parentElement;
+  const W = c.offsetWidth || 360, H = c.offsetHeight || 180;
+  const cx = W/2, cy = H/2, vR = Math.min(W,H)*0.18;
+  for (let i = 0; i < 220; i++) {
+    let x, y, t = 0;
+    do { x = Math.random()*W; y = Math.random()*H; t++; }
+    while (Math.hypot(x-cx, y-cy) < vR+12 && t < 60);
+    const s = document.createElement('div');
+    s.className = 'v-star';
+    const sz = Math.random()*1.8+0.3, op = Math.random()*0.6+0.15;
+    s.style.cssText = `left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;--dur:${(Math.random()*4+2).toFixed(1)}s;--base-op:${op};animation-delay:${(Math.random()*5).toFixed(1)}s;`;
+    sf.appendChild(s);
+  }
+}
+
+function revealO5() {
+  const c = document.getElementById('vO5C');
+  const bw = document.getElementById('vOBW');
+  const af = document.getElementById('vAF');
+  const btn = document.getElementById('vOB');
+  btn.disabled = true;
+  c.classList.add('scanning');
+  setTimeout(() => c.classList.remove('scanning'), 600);
+  setTimeout(() => c.classList.add('revealed'), 350);
+  setTimeout(() => {
+    af.classList.add('visible');
+    af.style.animation = 'none';
+    af.offsetHeight;
+    af.style.animation = '';
+  }, 500);
+  bw.style.opacity = '0';
+  setTimeout(() => bw.style.display = 'none', 450);
+}
+
+window.addEventListener('load', buildStars);
+window.addEventListener('resize', () => {
+  const sf = document.getElementById('vSF');
+  if (sf) { sf.innerHTML = ''; buildStars(); }
+});
+
+</script>
+</body>
+</html>
